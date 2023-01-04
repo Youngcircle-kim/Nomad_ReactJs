@@ -1,4 +1,6 @@
 # Nomad_ReactJs
 공부용
 
-Day 1
+1/4
+
+es6+ iterator/iterable protocol
