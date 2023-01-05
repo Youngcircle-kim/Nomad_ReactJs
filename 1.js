@@ -15,6 +15,6 @@ const times = (f, n)=>{
         f(i)
     }
 }
-
+log(add10(4));
 log(addMaker(10)(4));
 times(a=>log(a+10),3)
