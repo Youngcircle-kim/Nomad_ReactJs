@@ -1,6 +1,9 @@
-# Nomad_ReactJs
-공부용
+### JS나 관련 프레임워크 공부용
 
 1/4
 
-es6+ iterator/iterable protocol
+iterator/iterable protocol
+
+1/5
+
+generator, odds
