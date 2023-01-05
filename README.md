@@ -7,3 +7,5 @@ iterator/iterable protocol
 1/5
 
 generator, odds
+
+filter, reduce
