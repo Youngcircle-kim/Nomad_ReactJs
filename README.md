@@ -9,3 +9,7 @@ iterator/iterable protocol
 generator, odds
 
 filter, reduce
+
+1/6
+
+go, pipe, curry
