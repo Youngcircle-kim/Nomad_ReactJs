@@ -16,7 +16,7 @@ const map = curry((f,iter)=>{
         res.push(f(a));
     }
     return res;
-})
+});
 
 const filter = curry((f, iter)=>{
     let res = [];
@@ -40,45 +40,24 @@ const reduce = curry((f, acc, iter) =>{
     return acc;
 });
 const add = (a,b)=> a+b;
-log(
-    reduce(
-        add,
-        map(
-            p=> p.price,
-            filter(
-                p=> p.price < 20000, products)
-        )
-    )
-);
-console.clear();
-
-//go, pipe
 const go = (...args) => reduce((a, f)=>f(a), args);
-
 const pipe =(...fs)=> (a) => go(a, ...fs);
 
-const f = pipe(
-    a => a+1,
-    a => a+10,
-    a => a+100
+const total_price = pipe(
+    map(p=> p.price),
+    reduce(add)
 );
-log(f(0));
-
+const base_total_price = predi => pipe(
+    filter(predi),
+    total_price
+)
 go(
     products,
-    products => filter(p=>p.price <20000, products),
-    products => map(p=> p.price, products),
-    prices =>   reduce(add, prices),
+    base_total_price(p=>p.price <20000),
     log
 );
-
-const mult = curry((a,b)=> a*b);
-log(mult(1)(2))
-
 go(
     products,
-    filter(p=>p.price <20000),
-    map(p=> p.price),
-    reduce(add),
+    base_total_price(p=>p.price >= 20000),
     log
 );
