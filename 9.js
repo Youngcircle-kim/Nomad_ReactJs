@@ -1,5 +1,7 @@
+const curry = f => (a,..._) =>
+    _.length? f(a, ..._) : (..._) => f(a, ..._);
 
-const reduce = (f,acc,iter)=>{
+const reduce = curry((f,acc,iter)=>{
     if (!iter) {
         iter = acc[Symbol.iterator]();
         acc = iter.next().value;
@@ -8,7 +10,9 @@ const reduce = (f,acc,iter)=>{
         acc = f(acc, a);
     }
     return acc;
-};
+});
+
+const go = (...args) => reduce((a, f)=>f(a), args);
 //range
 const add = (a,b)=> a+b;
 const range = a => {
@@ -19,15 +23,14 @@ const range = a => {
     return lst;
 };
 
-console.log(range(5));
-//[0, 1, 2, 3, 4]
+// console.log(range(5));
+// [0, 1, 2, 3, 4]
+//
+// console.log(range(2));
+// [0, 1]
+// var list = range(4);
+// console.log(reduce(add, list));
 
-console.log(range(2));
-//[0, 1]
-var list = range(4);
-console.log(reduce(add, list));
-
-console.clear()
 
 //느긋한 L.range
 
@@ -38,4 +41,37 @@ L.range = function *(a) {
         yield i;
     }
 };
+
+//test
+function test(name, time, f){
+    console.time(name);
+    while (time--) {
+    f();
+    }
+    console.timeEnd(name);
+}
+
+// test("range", 10, ()=>reduce(add, range(1000000)));
+// test("L.range", 10, ()=>reduce(add, L.range(1000000)));
+console.clear();
+
+//take
+//지연성과 같이 사용했을 때, 효율이 극대화 된다.
+const take = (l, iter)=>{
+    let res = [];
+    for (const a of iter){
+        res.push(a);
+        if (res.length === l){
+            return res;
+        }
+    }
+    return res;
+};
+
+go(
+    L.range(10000),
+    take(5),
+    reduce(add),
+    log()
+);
 
