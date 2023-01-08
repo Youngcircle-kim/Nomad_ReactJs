@@ -1,7 +1,7 @@
 const log = a => console.log(a);
 
 //기존 리스트 순회
-const list = [1,2,3];
+let list = [1,2,3];
 // for (var i = 0; i<list.length; i++){
 //     log(list[i])
 // }
