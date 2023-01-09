@@ -80,3 +80,35 @@ go(
 // -느긋한 계산법
 // -제너레이터/이터레이터 프로토콜을 기반으로 구현
 
+console.clear()
+//L.map
+
+L.map = function *(f,iter) {
+    for (const a of iter)
+        yield f(a);
+};
+
+let it = L.map(a => a+10, [1,2,3]);
+
+// 이터러블이라 이리 표현
+// console.log(it.next());
+// console.log(it.next());
+// console.log(it.next());
+// console.log(it.next());
+
+//L.filter
+L.filter = function *(f, iter){
+  for (const a of iter){
+      if (f(a)) {
+          yield a;
+      }
+  }
+};
+
+let it2 = L.filter(a => a%2, [1,2,3,4]);
+
+// 이것 또한 이터러블이기에 이리 표현
+// console.log(it2.next());
+// console.log(it2.next());
+// console.log(it2.next());
+// console.log(it2.next());
