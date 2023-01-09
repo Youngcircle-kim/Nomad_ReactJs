@@ -57,7 +57,7 @@ console.clear();
 
 //take
 //지연성과 같이 사용했을 때, 효율이 극대화 된다.
-const take = (l, iter)=>{
+const take = curry((l, iter)=>{
     let res = [];
     for (const a of iter){
         res.push(a);
@@ -66,12 +66,17 @@ const take = (l, iter)=>{
         }
     }
     return res;
-};
+});
 
 go(
     L.range(10000),
     take(5),
     reduce(add),
-    log()
+    console.log
 );
+
+// 이터러블 중심 프로그래밍에서의 지연 평가(Lazy Evaluation)
+// -제때 계산법
+// -느긋한 계산법
+// -제너레이터/이터레이터 프로토콜을 기반으로 구현
 
